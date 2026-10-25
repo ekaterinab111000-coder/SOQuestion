@@ -8,13 +8,14 @@ namespace SOQuestion.Models
         private static Dictionary<int, Dictionary<Translation, string>> _translations;
         static MultiLanguageViewModel()
         {
+            //In production this will be filled from a database
             var english = new Dictionary<Translation, string>()
             {
                 { Translation.ERROR_EMAIL_REQUIRED, "Email Address is a required field" },
                 { Translation.ERROR_INVALID_EMAIL, "Not a valid Email Address" },
                 { Translation.ERROR_PASSWORD_REQUIRED, "Password is a required field" }
             };
-            var croation = new Dictionary<Translation, string>()
+            var croatian = new Dictionary<Translation, string>()
             {
                 { Translation.ERROR_EMAIL_REQUIRED, "Adresa e-pošte je obavezno polje" },
                 { Translation.ERROR_INVALID_EMAIL, "Neispravna adresa e-pošte" },
@@ -23,7 +24,7 @@ namespace SOQuestion.Models
             _translations = new Dictionary<int, Dictionary<Translation, string>>()
             {
                 { 1, english },
-                { 2, croation }
+                { 2, croatian }
             };
         }
         public MultiLanguageViewModel() 
@@ -31,7 +32,6 @@ namespace SOQuestion.Models
         }
         public MultiLanguageViewModel(HttpRequest request)
         {
-            //In production this will be filled from a database
             LanguageId = request.HttpContext.Session.GetInt32("languageid") ?? 1;
         }
         public static Dictionary<int, string> Languages { get; set; } = new Dictionary<int, string>()
